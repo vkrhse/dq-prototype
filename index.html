@@ -613,10 +613,10 @@
     const status = badge.classList.contains('fresh') ? 'fresh' : badge.classList.contains('aging') ? 'aging' : 'stale';
     const age = badge.querySelector('.age')?.textContent || '2м';
     document.getElementById('ttTitle').textContent = info.title;
+    // NB: just update text of existing #ttAge span; do NOT replace innerHTML
+    // of #ttBadge — that would wipe the #ttAge element and break next call.
     document.getElementById('ttAge').textContent = age;
-    const ttBadge = document.getElementById('ttBadge');
-    ttBadge.className = 'badge ' + status;
-    ttBadge.innerHTML = '<span class="b-dot"></span><span>' + age + '</span>';
+    document.getElementById('ttBadge').className = 'badge ' + status;
     document.getElementById('ttSource').textContent = info.source;
     document.getElementById('ttLatAvg').textContent = info.latAvg;
     document.getElementById('ttDQ').textContent = info.dq;
