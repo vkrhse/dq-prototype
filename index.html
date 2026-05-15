@@ -54,7 +54,7 @@
   .dash-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
   .dash-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
   .dash-time { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); }
-  .status-bar { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1); padding: 14px 18px; display: flex; align-items: center; gap: 20px; margin-bottom: 14px; border-left: 4px solid var(--fresh); }
+  .status-bar { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1); padding: 14px 18px; display: flex; align-items: center; gap: 20px; margin-top: 18px; margin-bottom: 0; border-left: 4px solid var(--fresh); }
   .status-bar.scenario-mixed { border-left-color: var(--aging); }
   .status-bar.scenario-bad { border-left-color: var(--stale); }
   .status-pill { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
@@ -164,8 +164,8 @@
   .tt-cta button.primary { background: var(--ink-1); color: #fff; border-color: var(--ink-1); }
   .scrim { position: fixed; inset: 0; background: rgba(20,20,18,0.20); z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
   .scrim.show { opacity: 1; pointer-events: auto; }
-  .panel { position: fixed; top: 0; right: 0; height: 100vh; width: 560px; background: var(--surface); box-shadow: -8px 0 32px rgba(20,20,18,0.12); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 600; display: flex; flex-direction: column; }
-  .panel.show { transform: translateX(0); }
+  .panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 560px; max-height: 86vh; background: var(--surface); border-radius: var(--radius-lg); box-shadow: 0 24px 64px rgba(20,20,18,0.25); transition: opacity 0.25s ease, transform 0.25s ease; z-index: 600; display: flex; flex-direction: column; opacity: 0; pointer-events: none; }
+  .panel.show { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
   .panel-head { padding: 18px 22px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .panel-title { font-size: 16px; font-weight: 700; }
   .panel-sub { font-size: 12px; color: var(--ink-3); margin-top: 2px; font-family: var(--font-mono); }
@@ -244,31 +244,11 @@
       <div class="dash-time" id="liveTime">13 марта 2026 — 14:25:17</div>
     </div>
 
-    <div class="status-bar" id="statusBar">
-      <div class="status-pill">
-        <span class="led"></span>
-        <span id="statusLabel">Состояние дашборда: Хорошее</span>
-      </div>
-      <div class="status-meta">Последнее обновление: <span class="val" id="statusUpdated">2 мин назад</span></div>
-      <div class="status-counters">
-        <span class="counter fresh"><span class="swatch"></span><span id="cFresh">5</span> свежих</span>
-        <span class="counter aging"><span class="swatch"></span><span id="cAging">2</span> стареющих</span>
-        <span class="counter stale"><span class="swatch"></span><span id="cStale">1</span> устаревший</span>
-      </div>
-      <button class="btn-lineage" id="openLineage">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="3" cy="3" r="2"/><circle cx="13" cy="8" r="2"/><circle cx="3" cy="13" r="2"/>
-          <line x1="4.5" y1="4" x2="11.5" y2="7"/><line x1="4.5" y1="12" x2="11.5" y2="9"/>
-        </svg>
-        Lineage
-      </button>
-    </div>
-
     <div class="alerts">
       <div class="alert">
         <span class="tag">Warning</span>
         <div class="body">
-          <strong>Conversion Rate</strong> приближается к порогу устаревания <span style="font-family:var(--font-mono)">(47м / 60м)</span>
+          <strong>Conversion Rate</strong> приближается к порогу устаревания (посл. обновление <span style="font-family:var(--font-mono)">13:38</span>, порог 60 мин)
           <div class="meta">DQ: 3/4 пройдено · Не пройдена: expect_row_count_to_be_between</div>
         </div>
         <button class="close">×</button>
@@ -282,7 +262,7 @@
           <div class="widget-title">Revenue Today</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="revenue">
-              <span class="b-dot"></span><span class="age">2м</span>
+              <span class="b-dot"></span><span class="age">14:23</span>
             </span>
             <span class="badge dq fresh dq-badge">4/4</span>
           </div>
@@ -300,7 +280,7 @@
           <div class="widget-title">Orders</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="orders">
-              <span class="b-dot"></span><span class="age">2м</span>
+              <span class="b-dot"></span><span class="age">14:23</span>
             </span>
             <span class="badge dq fresh dq-badge">4/4</span>
           </div>
@@ -318,7 +298,7 @@
           <div class="widget-title">Conversion Rate</div>
           <div class="badges">
             <span class="badge aging fresh-badge" data-tooltip="conversion">
-              <span class="b-dot"></span><span class="age">47м</span>
+              <span class="b-dot"></span><span class="age">13:38</span>
             </span>
             <span class="badge dq aging dq-badge">3/4</span>
           </div>
@@ -336,7 +316,7 @@
           <div class="widget-title">Active Users</div>
           <div class="badges">
             <span class="badge stale fresh-badge" data-tooltip="users">
-              <span class="b-dot"></span><span class="age">3ч</span>
+              <span class="b-dot"></span><span class="age">11:25</span>
             </span>
             <span class="badge dq fresh dq-badge">3/3</span>
           </div>
@@ -357,7 +337,7 @@
           <div class="widget-title">Заказы по категориям</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="categories">
-              <span class="b-dot"></span><span class="age">5м</span>
+              <span class="b-dot"></span><span class="age">14:20</span>
             </span>
             <span class="badge dq fresh dq-badge">2/2</span>
           </div>
@@ -393,7 +373,7 @@
           <div class="widget-title">Conversion Funnel</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="funnel">
-              <span class="b-dot"></span><span class="age">2м</span>
+              <span class="b-dot"></span><span class="age">14:23</span>
             </span>
             <span class="badge dq fresh dq-badge">2/2</span>
           </div>
@@ -413,7 +393,7 @@
           <div class="widget-title">Top Products</div>
           <div class="badges">
             <span class="badge aging fresh-badge" data-tooltip="products">
-              <span class="b-dot"></span><span class="age">38м</span>
+              <span class="b-dot"></span><span class="age">13:47</span>
             </span>
             <span class="badge dq aging dq-badge">7/8</span>
           </div>
@@ -437,7 +417,7 @@
           <div class="widget-title">Топ страниц по просмотрам</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="pages">
-              <span class="b-dot"></span><span class="age">2м</span>
+              <span class="b-dot"></span><span class="age">14:23</span>
             </span>
             <span class="badge dq fresh dq-badge">4/4</span>
           </div>
@@ -452,6 +432,26 @@
           <div class="hbar-row"><span class="lbl">/checkout</span><div class="bar-wrap"><div class="bar" style="width:91.6%; background:var(--chart-accent);"></div></div><span class="val">1.74k</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="status-bar" id="statusBar">
+      <div class="status-pill">
+        <span class="led"></span>
+        <span id="statusLabel">Состояние дашборда: Хорошее</span>
+      </div>
+      <div class="status-meta">Последнее обновление: <span class="val" id="statusUpdated">14:23:15</span></div>
+      <div class="status-counters">
+        <span class="counter fresh"><span class="swatch"></span><span id="cFresh">5</span> свежих</span>
+        <span class="counter aging"><span class="swatch"></span><span id="cAging">2</span> стареющих</span>
+        <span class="counter stale"><span class="swatch"></span><span id="cStale">1</span> устаревший</span>
+      </div>
+      <button class="btn-lineage" id="openLineage">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="3" cy="3" r="2"/><circle cx="13" cy="8" r="2"/><circle cx="3" cy="13" r="2"/>
+          <line x1="4.5" y1="4" x2="11.5" y2="7"/><line x1="4.5" y1="12" x2="11.5" y2="9"/>
+        </svg>
+        Lineage
+      </button>
     </div>
 
     <div class="pd-flow">
@@ -488,9 +488,9 @@
   <div class="tooltip" id="tooltip">
     <div class="tt-head">
       <span id="ttTitle">Revenue Today</span>
-      <span id="ttBadge" class="badge fresh"><span class="b-dot"></span><span id="ttAge">2м</span></span>
+      <span id="ttBadge" class="badge fresh"><span class="b-dot"></span><span id="ttAge">14:23</span></span>
     </div>
-    <div class="tt-row"><span class="k">Посл. обновление</span><span class="v" id="ttUpdated">14:23:15 (2 мин назад)</span></div>
+    <div class="tt-row"><span class="k">Посл. обновление</span><span class="v" id="ttUpdated">2026-03-13 14:23:15</span></div>
     <div class="tt-row"><span class="k">Источник</span><span class="v" id="ttSource">events_store → agg_1m → agg_1h</span></div>
     <div class="tt-row"><span class="k">Задержка</span><span class="v"><span id="ttLatAvg">avg 1.2с</span></span></div>
     <div class="tt-row"><span class="k">DQ</span><span class="v" id="ttDQ">12/12 пройдено</span></div>
@@ -684,9 +684,9 @@
 
   const statusBar = document.getElementById('statusBar');
   const scenarios = {
-    good: { label: 'Состояние дашборда: Хорошее', cls: '', counts: [7, 1, 0], states: { revenue:'fresh', orders:'fresh', conversion:'fresh', users:'fresh', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'3м', users:'4м', categories:'5м', funnel:'2м', pages:'2м', products:'38м' } },
-    mixed: { label: 'Состояние дашборда: Внимание', cls: 'scenario-mixed', counts: [5, 2, 1], states: { revenue:'fresh', orders:'fresh', conversion:'aging', users:'stale', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'47м', users:'3ч', categories:'5м', funnel:'2м', pages:'2м', products:'38м' } },
-    bad: { label: 'Состояние дашборда: Критическое', cls: 'scenario-bad', counts: [2, 2, 4], states: { revenue:'aging', orders:'aging', conversion:'stale', users:'stale', categories:'fresh', funnel:'fresh', pages:'aging', products:'stale' }, ages: { revenue:'12м', orders:'18м', conversion:'2ч', users:'5ч', categories:'8м', funnel:'4м', pages:'52м', products:'2ч 15м' } }
+    good: { label: 'Состояние дашборда: Хорошее', cls: '', counts: [7, 1, 0], states: { revenue:'fresh', orders:'fresh', conversion:'fresh', users:'fresh', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'14:23', orders:'14:23', conversion:'14:22', users:'14:21', categories:'14:20', funnel:'14:23', pages:'14:23', products:'13:47' } },
+    mixed: { label: 'Состояние дашборда: Внимание', cls: 'scenario-mixed', counts: [5, 2, 1], states: { revenue:'fresh', orders:'fresh', conversion:'aging', users:'stale', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'14:23', orders:'14:23', conversion:'13:38', users:'11:25', categories:'14:20', funnel:'14:23', pages:'14:23', products:'13:47' } },
+    bad: { label: 'Состояние дашборда: Критическое', cls: 'scenario-bad', counts: [2, 2, 4], states: { revenue:'aging', orders:'aging', conversion:'stale', users:'stale', categories:'fresh', funnel:'fresh', pages:'aging', products:'stale' }, ages: { revenue:'14:13', orders:'14:07', conversion:'12:25', users:'09:25', categories:'14:17', funnel:'14:21', pages:'13:33', products:'12:10' } }
   };
 
   function applyScenario(name) {
