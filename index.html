@@ -76,7 +76,7 @@
   .btn-lineage { background: var(--ink-1); color: #fff; border: none; padding: 8px 14px; border-radius: 7px; font-family: var(--font-display); font-size: 12.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
   .btn-lineage:hover { background: #000; }
   .btn-lineage svg { width: 14px; height: 14px; }
-  .alerts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .alerts { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; margin-bottom: 0; }
   .alert { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: var(--radius); font-size: 13px; line-height: 1.4; background: var(--surface); box-shadow: var(--shadow-1); border-left: 3px solid var(--aging); }
   .alert.critical { border-left-color: var(--stale); }
   .alert.info { border-left-color: var(--fresh); }
@@ -242,17 +242,6 @@
     <div class="dash-header">
       <div class="dash-title">Аналитический дашборд реального времени</div>
       <div class="dash-time" id="liveTime">13 марта 2026 — 14:25:17</div>
-    </div>
-
-    <div class="alerts">
-      <div class="alert">
-        <span class="tag">Warning</span>
-        <div class="body">
-          <strong>Conversion Rate</strong> приближается к порогу устаревания (посл. обновление <span style="font-family:var(--font-mono)">13:38</span>, порог 60 мин)
-          <div class="meta">DQ: 3/4 пройдено · Не пройдена: expect_row_count_to_be_between</div>
-        </div>
-        <button class="close">×</button>
-      </div>
     </div>
 
     <div class="grid">
@@ -452,6 +441,17 @@
         </svg>
         Lineage
       </button>
+    </div>
+
+    <div class="alerts">
+      <div class="alert">
+        <span class="tag">Warning</span>
+        <div class="body">
+          <strong>Conversion Rate</strong> приближается к порогу устаревания (посл. обновление <span style="font-family:var(--font-mono)">13:38</span>, порог 60 мин)
+          <div class="meta">DQ: 3/4 пройдено · Не пройдена: expect_row_count_to_be_between</div>
+        </div>
+        <button class="close">×</button>
+      </div>
     </div>
 
     <div class="pd-flow">
