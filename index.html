@@ -131,6 +131,18 @@
   .bars .bar { flex: 1; background: var(--ink-1); border-radius: 3px 3px 0 0; }
   .bars-labels { display: flex; justify-content: space-around; gap: 6px; font-family: var(--font-mono); font-size: 9.5px; color: var(--ink-3); padding: 0 4px; margin-top: 4px; }
   .bars-labels span { flex: 1; text-align: center; }
+  .donut-wrap { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
+  .donut-svg { width: 140px; height: 140px; flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--ink-2); }
+  .donut-legend div { display: flex; align-items: center; gap: 8px; }
+  .donut-legend .sw { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .donut-legend em { font-style: normal; font-family: var(--font-mono); font-size: 11px; color: var(--ink-1); margin-left: auto; padding-left: 8px; }
+  .hbars { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+  .hbar-row { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--ink-2); }
+  .hbar-row .lbl { width: 86px; flex-shrink: 0; font-family: var(--font-mono); font-size: 11px; color: var(--ink-1); }
+  .hbar-row .bar-wrap { flex: 1; height: 16px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+  .hbar-row .bar { height: 100%; background: var(--ink-1); border-radius: 3px; }
+  .hbar-row .val { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; width: 42px; text-align: right; color: var(--ink-1); }
   .tooltip { position: absolute; z-index: 200; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-3); padding: 14px; width: 320px; font-size: 12.5px; display: none; }
   .tooltip.show { display: block; }
   .tt-head { font-weight: 700; font-size: 13.5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
@@ -337,28 +349,42 @@
       </div>
     </div>
 
-    <div class="grid-row-2">
+    <div class="grid-row-2" style="grid-template-columns: 1fr 1fr;">
 
-      <div class="widget chart-lg fresh" data-metric="revenue_ts">
+      <div class="widget fresh" data-metric="categories">
         <div class="widget-head">
-          <div class="widget-title">Revenue Over Time (24ч)</div>
+          <div class="widget-title">Заказы по категориям</div>
           <div class="badges">
-            <span class="badge fresh fresh-badge" data-tooltip="revenue_ts">
-              <span class="b-dot"></span><span class="age">2м</span>
+            <span class="badge fresh fresh-badge" data-tooltip="categories">
+              <span class="b-dot"></span><span class="age">5м</span>
             </span>
-            <span class="badge dq fresh dq-badge">4/4</span>
+            <span class="badge dq fresh dq-badge">2/2</span>
           </div>
         </div>
-        <svg class="chart-svg" viewBox="0 0 600 160" preserveAspectRatio="none">
-          <line class="grid-line" x1="0" y1="40" x2="600" y2="40"/>
-          <line class="grid-line" x1="0" y1="80" x2="600" y2="80"/>
-          <line class="grid-line" x1="0" y1="120" x2="600" y2="120"/>
-          <path class="area" fill="var(--fresh)" d="M0,130 C30,128 50,120 80,118 C110,116 140,108 180,100 C220,92 260,98 300,88 C340,78 380,82 420,68 C460,54 500,62 540,48 C580,34 600,30 600,30 L600,160 L0,160 Z"/>
-          <path class="line" stroke="var(--fresh)" d="M0,130 C30,128 50,120 80,118 C110,116 140,108 180,100 C220,92 260,98 300,88 C340,78 380,82 420,68 C460,54 500,62 540,48 C580,34 600,30 600,30"/>
-          <text class="axis-tick" x="0" y="154">00:00</text>
-          <text class="axis-tick" x="290" y="154">12:00</text>
-          <text class="axis-tick" x="572" y="154">Сейчас</text>
-        </svg>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 160 160">
+            <!-- cx=80, cy=80, r=58, stroke-width=24; C = 2πr ≈ 364.42 -->
+            <!-- Электроника 30.42% → 110.88; Красота 20.66% → 75.30; Одежда 19.74% → 71.94; Дом 19.47% → 70.96; Спорт 9.71% → 35.39 -->
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#E1E1DA" stroke-width="24"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#0072B2" stroke-width="24"
+                    stroke-dasharray="110.88 253.54" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#009E73" stroke-width="24"
+                    stroke-dasharray="75.30 289.12" stroke-dashoffset="-110.88" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#6E6E68" stroke-width="24"
+                    stroke-dasharray="71.94 292.48" stroke-dashoffset="-186.18" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#E69F00" stroke-width="24"
+                    stroke-dasharray="70.96 293.46" stroke-dashoffset="-258.12" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#56B4E9" stroke-width="24"
+                    stroke-dasharray="35.39 329.03" stroke-dashoffset="-329.08" transform="rotate(-90 80 80)"/>
+          </svg>
+          <div class="donut-legend">
+            <div><span class="sw" style="background:#0072B2"></span>Электроника <em>30.4%</em></div>
+            <div><span class="sw" style="background:#009E73"></span>Красота <em>20.7%</em></div>
+            <div><span class="sw" style="background:#6E6E68"></span>Одежда <em>19.7%</em></div>
+            <div><span class="sw" style="background:#E69F00"></span>Дом <em>19.5%</em></div>
+            <div><span class="sw" style="background:#56B4E9"></span>Спорт <em>9.7%</em></div>
+          </div>
+        </div>
       </div>
 
       <div class="widget fresh" data-metric="funnel">
@@ -366,45 +392,21 @@
           <div class="widget-title">Conversion Funnel</div>
           <div class="badges">
             <span class="badge fresh fresh-badge" data-tooltip="funnel">
-              <span class="b-dot"></span><span class="age">5м</span>
+              <span class="b-dot"></span><span class="age">2м</span>
             </span>
             <span class="badge dq fresh dq-badge">2/2</span>
           </div>
         </div>
         <div class="funnel">
-          <div class="funnel-row"><span class="lbl">Просмотр</span><div class="bar-wrap"><div class="bar" style="width:100%; background:var(--fresh);"></div></div><span class="pct">40%</span></div>
-          <div class="funnel-row"><span class="lbl">Корзина</span><div class="bar-wrap"><div class="bar" style="width:75%; background:var(--fresh);"></div></div><span class="pct">30%</span></div>
-          <div class="funnel-row"><span class="lbl">Оформл.</span><div class="bar-wrap"><div class="bar" style="width:50%; background:var(--fresh);"></div></div><span class="pct">20%</span></div>
-          <div class="funnel-row"><span class="lbl">Покупка</span><div class="bar-wrap"><div class="bar" style="width:25%; background:var(--fresh);"></div></div><span class="pct">10%</span></div>
-        </div>
-      </div>
-
-      <div class="widget fresh" data-metric="by_day">
-        <div class="widget-head">
-          <div class="widget-title">Revenue by Day</div>
-          <div class="badges">
-            <span class="badge fresh fresh-badge" data-tooltip="by_day">
-              <span class="b-dot"></span><span class="age">2м</span>
-            </span>
-            <span class="badge dq fresh dq-badge">4/4</span>
-          </div>
-        </div>
-        <div class="bars">
-          <div class="bar" style="height:55%"></div>
-          <div class="bar" style="height:62%"></div>
-          <div class="bar" style="height:48%"></div>
-          <div class="bar" style="height:70%"></div>
-          <div class="bar" style="height:85%"></div>
-          <div class="bar" style="height:42%"></div>
-          <div class="bar" style="height:38%"></div>
-        </div>
-        <div class="bars-labels">
-          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+          <div class="funnel-row"><span class="lbl">Просмотр</span><div class="bar-wrap"><div class="bar" style="width:100%; background:var(--fresh);"></div></div><span class="pct">40.3</span></div>
+          <div class="funnel-row"><span class="lbl">Корзина</span><div class="bar-wrap"><div class="bar" style="width:73%; background:var(--fresh);"></div></div><span class="pct">29.5</span></div>
+          <div class="funnel-row"><span class="lbl">Оформление</span><div class="bar-wrap"><div class="bar" style="width:50%; background:var(--fresh);"></div></div><span class="pct">20.1</span></div>
+          <div class="funnel-row"><span class="lbl">Покупка</span><div class="bar-wrap"><div class="bar" style="width:25%; background:var(--fresh);"></div></div><span class="pct">10.1</span></div>
         </div>
       </div>
     </div>
 
-    <div class="grid-row-2" style="grid-template-columns: 1fr;">
+    <div class="grid-row-2" style="grid-template-columns: 1fr 1fr;">
       <div class="widget aging" data-metric="products">
         <div class="widget-head">
           <div class="widget-title">Top Products</div>
@@ -417,16 +419,37 @@
         </div>
         <table class="mini-table">
           <thead>
-            <tr><th>Продукт</th><th class="r">Выручка</th><th class="r">Заказы</th><th class="r">Конверсия</th></tr>
+            <tr><th>Товар</th><th class="r">Выручка</th><th class="r">Заказы</th><th class="r">Конв.</th></tr>
           </thead>
           <tbody>
-            <tr><td class="name">Analytics Pro</td><td class="r">28 412 ₽</td><td class="r">412</td><td class="r">4.1%</td></tr>
-            <tr><td class="name">DataSync Plus</td><td class="r">24 318 ₽</td><td class="r">318</td><td class="r">3.8%</td></tr>
-            <tr><td class="name">CloudBase Lite</td><td class="r">19 267 ₽</td><td class="r">267</td><td class="r">3.5%</td></tr>
-            <tr><td class="name">API Gateway</td><td class="r">17 245 ₽</td><td class="r">245</td><td class="r">3.2%</td></tr>
-            <tr><td class="name">MonitorLite</td><td class="r">14 198 ₽</td><td class="r">198</td><td class="r">2.9%</td></tr>
+            <tr><td class="name">Пылесос Dyson V12</td><td class="r">687К ₽</td><td class="r">199</td><td class="r">3.1%</td></tr>
+            <tr><td class="name">Крем Loccitane</td><td class="r">687К ₽</td><td class="r">204</td><td class="r">3.2%</td></tr>
+            <tr><td class="name">Ноутбук Lenovo IdeaPad</td><td class="r">658К ₽</td><td class="r">193</td><td class="r">3.0%</td></tr>
+            <tr><td class="name">Куртка Columbia зимняя</td><td class="r">627К ₽</td><td class="r">187</td><td class="r">2.9%</td></tr>
+            <tr><td class="name">iPhone 15 Pro</td><td class="r">613К ₽</td><td class="r">189</td><td class="r">3.0%</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="widget fresh" data-metric="pages">
+        <div class="widget-head">
+          <div class="widget-title">Топ страниц по просмотрам</div>
+          <div class="badges">
+            <span class="badge fresh fresh-badge" data-tooltip="pages">
+              <span class="b-dot"></span><span class="age">2м</span>
+            </span>
+            <span class="badge dq fresh dq-badge">4/4</span>
+          </div>
+        </div>
+        <div class="hbars">
+          <div class="hbar-row"><span class="lbl">/cart</span><div class="bar-wrap"><div class="bar" style="width:100%; background:var(--fresh);"></div></div><span class="val">1.90k</span></div>
+          <div class="hbar-row"><span class="lbl">/</span><div class="bar-wrap"><div class="bar" style="width:99.5%; background:var(--fresh);"></div></div><span class="val">1.89k</span></div>
+          <div class="hbar-row"><span class="lbl">/product/1</span><div class="bar-wrap"><div class="bar" style="width:98.4%; background:var(--fresh);"></div></div><span class="val">1.87k</span></div>
+          <div class="hbar-row"><span class="lbl">/product/2</span><div class="bar-wrap"><div class="bar" style="width:95.3%; background:var(--fresh);"></div></div><span class="val">1.81k</span></div>
+          <div class="hbar-row"><span class="lbl">/profile</span><div class="bar-wrap"><div class="bar" style="width:94.2%; background:var(--fresh);"></div></div><span class="val">1.79k</span></div>
+          <div class="hbar-row"><span class="lbl">/catalog</span><div class="bar-wrap"><div class="bar" style="width:92.1%; background:var(--fresh);"></div></div><span class="val">1.75k</span></div>
+          <div class="hbar-row"><span class="lbl">/checkout</span><div class="bar-wrap"><div class="bar" style="width:91.6%; background:var(--fresh);"></div></div><span class="val">1.74k</span></div>
+        </div>
       </div>
     </div>
 
@@ -599,9 +622,9 @@
     orders: { title: 'Orders', source: 'events_store → orders_agg', dq: '4/4 пройдено', thresh: 'θf=5м · θw=60м', latAvg: 'avg 1.5с' },
     conversion: { title: 'Conversion Rate', source: 'events_store → users_dim → metrics_enr.', dq: '3/4 (1 fail)', thresh: 'θf=5м · θw=60м', latAvg: 'avg 4.2с' },
     users: { title: 'Active Users', source: 'events_store → user_sessions_dim', dq: '3/3 пройдено', thresh: 'θf=15м · θw=60м', latAvg: 'avg 0.9с' },
-    revenue_ts: { title: 'Revenue Over Time', source: 'events_store → agg_1m', dq: '4/4 пройдено', thresh: 'θf=5м · θw=60м', latAvg: 'avg 1.2с' },
+    categories: { title: 'Заказы по категориям', source: 'orders → products_dim → category_agg', dq: '2/2 пройдено', thresh: 'θf=5м · θw=60м', latAvg: 'avg 1.4с' },
     funnel: { title: 'Conversion Funnel', source: 'events_store → funnel_agg', dq: '2/2 пройдено', thresh: 'θf=5м · θw=60м', latAvg: 'avg 1.8с' },
-    by_day: { title: 'Revenue by Day', source: 'agg_1h → daily_revenue', dq: '4/4 пройдено', thresh: 'θf=15м · θw=2ч', latAvg: 'avg 2.1с' },
+    pages: { title: 'Топ страниц по просмотрам', source: 'events_store → pageviews_agg', dq: '4/4 пройдено', thresh: 'θf=5м · θw=60м', latAvg: 'avg 1.1с' },
     products: { title: 'Top Products', source: 'orders → products_dim → top_products', dq: '7/8 (1 fail)', thresh: 'θf=15м · θw=60м', latAvg: 'avg 3.4с' }
   };
 
@@ -660,9 +683,9 @@
 
   const statusBar = document.getElementById('statusBar');
   const scenarios = {
-    good: { label: 'Состояние дашборда: Хорошее', cls: '', counts: [7, 1, 0], states: { revenue:'fresh', orders:'fresh', conversion:'fresh', users:'fresh', revenue_ts:'fresh', funnel:'fresh', by_day:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'3м', users:'4м', revenue_ts:'2м', funnel:'5м', by_day:'2м', products:'38м' } },
-    mixed: { label: 'Состояние дашборда: Внимание', cls: 'scenario-mixed', counts: [5, 2, 1], states: { revenue:'fresh', orders:'fresh', conversion:'aging', users:'stale', revenue_ts:'fresh', funnel:'fresh', by_day:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'47м', users:'3ч', revenue_ts:'2м', funnel:'5м', by_day:'2м', products:'38м' } },
-    bad: { label: 'Состояние дашборда: Критическое', cls: 'scenario-bad', counts: [2, 2, 4], states: { revenue:'aging', orders:'aging', conversion:'stale', users:'stale', revenue_ts:'fresh', funnel:'fresh', by_day:'stale', products:'stale' }, ages: { revenue:'12м', orders:'18м', conversion:'2ч', users:'5ч', revenue_ts:'4м', funnel:'8м', by_day:'1ч 20м', products:'2ч 15м' } }
+    good: { label: 'Состояние дашборда: Хорошее', cls: '', counts: [7, 1, 0], states: { revenue:'fresh', orders:'fresh', conversion:'fresh', users:'fresh', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'3м', users:'4м', categories:'5м', funnel:'2м', pages:'2м', products:'38м' } },
+    mixed: { label: 'Состояние дашборда: Внимание', cls: 'scenario-mixed', counts: [5, 2, 1], states: { revenue:'fresh', orders:'fresh', conversion:'aging', users:'stale', categories:'fresh', funnel:'fresh', pages:'fresh', products:'aging' }, ages: { revenue:'2м', orders:'2м', conversion:'47м', users:'3ч', categories:'5м', funnel:'2м', pages:'2м', products:'38м' } },
+    bad: { label: 'Состояние дашборда: Критическое', cls: 'scenario-bad', counts: [2, 2, 4], states: { revenue:'aging', orders:'aging', conversion:'stale', users:'stale', categories:'fresh', funnel:'fresh', pages:'aging', products:'stale' }, ages: { revenue:'12м', orders:'18м', conversion:'2ч', users:'5ч', categories:'8м', funnel:'4м', pages:'52м', products:'2ч 15м' } }
   };
 
   function applyScenario(name) {
