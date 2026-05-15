@@ -90,8 +90,7 @@
   .grid-row-2 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; margin-top: 14px; }
   .widget { background: var(--surface); border-radius: var(--radius); padding: 16px 16px 14px; position: relative; box-shadow: var(--shadow-1); border: 2px solid var(--fresh-border); min-height: 120px; }
   .widget.aging { border-color: var(--aging-border); }
-  .widget.stale { border-color: var(--stale-border); border-style: dashed; }
-  .widget.stale .widget-value, .widget.stale .chart-svg path { opacity: 0.55; }
+  .widget.stale { border-color: var(--stale-border); }
   .widget-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
   .widget-title { font-size: 12.5px; color: var(--ink-3); font-weight: 500; letter-spacing: 0.01em; text-transform: uppercase; }
   .badges { display: flex; gap: 4px; align-items: center; }
@@ -346,7 +345,7 @@
         <div class="widget-delta up">↑ +5.7%</div>
         <svg class="spark" viewBox="0 0 100 36" preserveAspectRatio="none">
           <path class="area" fill="var(--chart-accent)" d="M0,28 L12,24 L24,22 L36,20 L48,18 L60,16 L72,14 L84,12 L96,10 L100,9 L100,36 L0,36 Z"/>
-          <path class="line" stroke="var(--chart-accent)" stroke-dasharray="3 2" d="M0,28 L12,24 L24,22 L36,20 L48,18 L60,16 L72,14 L84,12 L96,10 L100,9"/>
+          <path class="line" stroke="var(--chart-accent)" d="M0,28 L12,24 L24,22 L36,20 L48,18 L60,16 L72,14 L84,12 L96,10 L100,9"/>
         </svg>
       </div>
     </div>
